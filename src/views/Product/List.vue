@@ -6,15 +6,12 @@
 
 <script>
 export default {
-  name: 'List',
+  name: "List",
   data() {
-    return {
-      
-    }
-  }
-}
+    return {};
+  },
+};
 </script>
 
 <style scoped>
-
 </style>
