@@ -3,8 +3,8 @@
     <t-layout>
         <t-aside><Menu /></t-aside>
         <t-layout>
-          <t-content>Content</t-content>
-          <t-footer>Footer</t-footer>
+          <t-content><router-view></router-view></t-content>
+          <t-footer>欢迎使用 admin-TDesign-vue</t-footer>
         </t-layout>
       </t-layout>
   </div>
@@ -21,7 +21,7 @@ export default {
     };
   },
   components: {
-    Menu
+    Menu,
   },
 };
 </script>
