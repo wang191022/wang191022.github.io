@@ -70,7 +70,7 @@ export default {
       } else {
         this.$axios({
           method: 'post',
-          url: '/login',
+          url: 'http://rap2api.taobao.org/app/mock/296473/login',
           data: this.formData
         })
         .then(res => {
