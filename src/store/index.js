@@ -8,11 +8,15 @@ export default new Vuex.Store({
     Authorization: localStorage.getItem("Authorization")
       ? localStorage.getItem("Authorization")
       : "",
+    tableData: []
   },
   mutations: {
     changeLogin(state, payLoad) {
       state.Authorization = payLoad.Authorization
       localStorage.setItem('Authorization', payLoad.Authorization)
+    },
+    updateTableData(state, payLoad) {
+      state.tableData = payLoad.tableData
     }
   },
   actions: {},

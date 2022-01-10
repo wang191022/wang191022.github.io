@@ -3,7 +3,7 @@
     <div class="btn">
       <el-button type="primary" @click="linkToForm()">会员注册</el-button>
     </div>
-    <el-table class="table" :data="tableData" style="width: 100%" stripe border>
+    <el-table class="table" :data="list" style="width: 100%" stripe border>
       <el-table-column prop="name" label="姓名" width="100"> </el-table-column>
       <el-table-column prop="id" label="会员ID" width="150"> </el-table-column>
       <el-table-column prop="date" label="生日" width="150"> </el-table-column>
@@ -29,16 +29,22 @@
 export default {
   name: "List",
   data() {
-    return {
-      tableData: null,
-    };
+    return {};
+  },
+  computed: {
+    list() {
+      return this.$store.state.tableData
+    }
   },
   methods: {
     getTableData() {
       this.$axios
         .get("http://rap2api.taobao.org/app/mock/296473/userInfo")
         .then((res) => {
-          this.tableData = res.data.data;
+          console.log(this.$store.state.tableData);
+          this.$store.commit('updateTableData', {
+            tableData: res.data.data
+          })
         })
         .catch((err) => {
           throw err;
