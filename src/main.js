@@ -2,8 +2,8 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import './plugins/tdesign.js'
 import axios from 'axios'
+import './plugins/element.js'
 // import { config } from 'vue/types/umd'
 
 Vue.config.productionTip = false
@@ -19,6 +19,10 @@ Vue.prototype.$axios.interceptors.request.use(
     return config
   },
   error => {
+    if (error.status === 200) {
+      localStorage.removeItem('Authorization');
+      this.$router.push('/login');
+    }
     return Promise.reject(error)
   })
 

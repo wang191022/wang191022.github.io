@@ -4,7 +4,7 @@
     <p>404 Not Found</p>
     <p class="info">抱歉，您访问的页面不存在</p>
     <div class="btnCtn">
-      <t-button theme="primary">返回首页</t-button>
+      <t-button theme="primary" @click="this.$router.push({name: 'Home'})">返回首页</t-button>
     </div>
   </div>
 </template>
