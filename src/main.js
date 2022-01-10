@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 import axios from 'axios'
 import './plugins/element.js'
+import 'default-passive-events'
 // import { config } from 'vue/types/umd'
 
 Vue.config.productionTip = false
