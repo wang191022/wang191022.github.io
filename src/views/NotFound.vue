@@ -1,10 +1,9 @@
 <template>
   <div class="notFound">
-    <icon name="link-unlink" style="color: #0052d9" size="72px" />
     <p>404 Not Found</p>
     <p class="info">抱歉，您访问的页面不存在</p>
     <div class="btnCtn">
-      <el-button type="primary" @click="this.$router.push({name: 'Home'})">返回首页</el-button>
+      <el-button type="primary" @click="returnHome()">返回首页</el-button>
     </div>
   </div>
 </template>
@@ -15,6 +14,11 @@ export default {
   data() {
     return {};
   },
+  methods: {
+    returnHome() {
+      this.$router.push({ name: 'Home' })
+    }
+  }
 };
 </script>
 
