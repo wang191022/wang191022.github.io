@@ -1,21 +1,19 @@
 <template>
   <div class="menu">
-    <t-menu theme="light" defaultValue="list" style="margin-right: 40px">
+     <el-menu
+      default-active="2"
+      class="el-menu-vertical-demo">
       <router-link v-for="(item, index) in menu" :key="index" :to="item.route">
-        <t-menu-item :value="item.name">
-          <template #icon>
-            <icon :name="item.icon" />
-          </template>
-          {{ item.title }}
-        </t-menu-item>
+        <el-menu-item :key="item.index">
+          <i :class="item.icon"></i>
+          <span slot="title">{{item.title}}</span>
+        </el-menu-item>
       </router-link>
-    </t-menu>
+     </el-menu>
   </div>
 </template>
 
 <script>
-import { Icon } from "tdesign-icons-vue";
-
 export default {
   name: "Menu",
   data() {
@@ -47,9 +45,6 @@ export default {
         },
       ],
     };
-  },
-  components: {
-    Icon,
   },
 };
 </script>

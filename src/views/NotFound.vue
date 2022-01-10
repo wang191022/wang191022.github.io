@@ -4,21 +4,16 @@
     <p>404 Not Found</p>
     <p class="info">抱歉，您访问的页面不存在</p>
     <div class="btnCtn">
-      <t-button theme="primary" @click="this.$router.push({name: 'Home'})">返回首页</t-button>
+      <el-button type="primary" @click="this.$router.push({name: 'Home'})">返回首页</el-button>
     </div>
   </div>
 </template>
 
 <script>
-import { Icon } from "tdesign-icons-vue";
-
 export default {
   name: "NotFound",
   data() {
     return {};
-  },
-  components: {
-    Icon,
   },
 };
 </script>

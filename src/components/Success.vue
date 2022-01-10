@@ -1,26 +1,21 @@
 <template>
   <div class="success">
-    <icon name="check-circle" style="color: #00a870" size="72px" />
+    <i class="el-icon-circle-check" style="color: #00a870" size="72px"></i>
     <p>项目已创建成功</p>
     <div class="btnCtn">
-      <t-button theme="primary" @click="this.$router.push({name: 'List'})"
-        >返回首页</t-button
+      <el-button type="primary" @click="this.$router.push({name: 'List'})"
+        >返回首页</el-button
       >
-      <t-button theme="default" @click="this.$router.push({name: 'Detail'})">查看详情</t-button>
+      <el-button type="default" @click="this.$router.push({name: 'Detail'})">查看详情</el-button>
     </div>
   </div>
 </template>
 
 <script>
-import { Icon } from "tdesign-icons-vue";
-
 export default {
   name: "Success",
   data() {
     return {};
-  },
-  components: {
-    Icon,
   },
   methods: {},
 };
