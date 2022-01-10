@@ -75,9 +75,9 @@ export default {
         })
         .then(res => {
           console.log(res)
-          this.userToken = 'Bearer' + res.data.data.body.token
+          this.userToken = 'Bearer' + res.data.token
           this.changeLogin({ Authorization: this.userToken })
-          this.$router.push({ name: '/list' })
+          this.$router.push({ name: 'List' })
         })
         .catch(err => {
           this.$message.warning('账号或密码错误')
