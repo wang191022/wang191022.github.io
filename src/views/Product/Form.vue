@@ -25,7 +25,7 @@
         <el-button type="primary" @click="submitForm('ruleForm')"
           >立即创建</el-button
         >
-        <el-button @click="resetForm('ruleForm')">重置</el-button>
+        <el-button @click="resetForm('ruleForm')"> 重置 </el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -62,6 +62,7 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           alert("submit!");
+          console.log(this.ruleForm);
         } else {
           console.log("error submit!!");
           return false;

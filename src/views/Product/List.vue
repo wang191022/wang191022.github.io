@@ -1,5 +1,8 @@
 <template>
   <div class="list">
+    <div class="btn">
+      <el-button type="primary" @click="linkToForm()">会员注册</el-button>
+    </div>
     <el-table class="table" :data="tableData" style="width: 100%" stripe border>
       <el-table-column prop="name" label="姓名" width="100"> </el-table-column>
       <el-table-column prop="id" label="会员ID" width="150"> </el-table-column>
@@ -13,10 +16,7 @@
           <el-button size="mini" @click="handleEdit(scope.$index, scope.row)"
             >编辑</el-button
           >
-          <el-button
-            size="mini"
-            type="danger"
-            @click="deleteItem(scope)"
+          <el-button size="mini" type="danger" @click="deleteItem(scope)"
             >删除</el-button
           >
         </template>
@@ -45,8 +45,11 @@ export default {
         });
     },
     deleteItem(scope) {
-      let i = this.tableData.indexOf(scope.row)
-      this.tableData.splice(i, 1)
+      let i = this.tableData.indexOf(scope.row);
+      this.tableData.splice(i, 1);
+    },
+    linkToForm() {
+      this.$router.push({ name: 'Form' })
     },
     handleEdit(index, row) {
       console.log(index, row);
@@ -61,5 +64,13 @@ export default {
 <style>
 div.cell {
   text-align: center;
+}
+
+.btn {
+  float: right;
+}
+
+.btn button {
+  margin-bottom: 20px;
 }
 </style>
