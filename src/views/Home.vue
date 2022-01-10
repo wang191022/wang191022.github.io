@@ -4,7 +4,7 @@
       <el-aside width="200px"><Menu /></el-aside>
       <el-container>
         <el-main><router-view /></el-main>
-        <el-footer>Footer</el-footer>
+        <el-footer>欢迎使用 Admin-Vue-Element</el-footer>
       </el-container>
     </el-container>
   </div>
@@ -27,7 +27,7 @@ export default {
 <style scoped>
 .el-footer {
   background-color: #b3c0d1;
-  color: #333;
+  color: rgba(0, 0, 0, .4);
   text-align: center;
   line-height: 60px;
 }
