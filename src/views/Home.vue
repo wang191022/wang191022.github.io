@@ -24,7 +24,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .el-footer {
   background-color: #b3c0d1;
   color: rgba(0, 0, 0, .4);
@@ -46,7 +46,4 @@ export default {
   line-height: 10px;
 }
 
-body > .el-container {
-  margin-bottom: 40px;
-}
 </style>
