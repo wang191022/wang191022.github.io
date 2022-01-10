@@ -16,7 +16,7 @@
           <el-button
             size="mini"
             type="danger"
-            @click="handleDelete(scope.$index, scope.row)"
+            @click="deleteItem(scope)"
             >删除</el-button
           >
         </template>
@@ -44,10 +44,11 @@ export default {
           throw err;
         });
     },
-    handleEdit(index, row) {
-      console.log(index, row);
+    deleteItem(scope) {
+      let i = this.tableData.indexOf(scope.row)
+      this.tableData.splice(i, 1)
     },
-    handleDelete(index, row) {
+    handleEdit(index, row) {
       console.log(index, row);
     },
   },
