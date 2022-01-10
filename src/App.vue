@@ -6,6 +6,6 @@
 
 <style scoped>
 #app {
-  height: 100vh;
+  height: 98vh;
 }
 </style>
