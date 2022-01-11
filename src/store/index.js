@@ -9,6 +9,13 @@ export default new Vuex.Store({
       ? localStorage.getItem("Authorization")
       : "",
     tableData: [],
+    firstId: 700000,
+    newCreate: 0
+  },
+  getters: {
+    newestId(state) {
+      return state.firstId + state.newCreate
+    }
   },
   mutations: {
     changeLogin(state, payLoad) {
@@ -20,6 +27,9 @@ export default new Vuex.Store({
     },
     deleteTableItem(state, payLoad) {
       state.tableData.splice(payLoad.i, 1);
+    },
+    updateCreatedId(state) {
+      state.newCreate ++
     }
   },
   actions: {},

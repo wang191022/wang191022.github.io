@@ -28,6 +28,9 @@
 </template>
 id
 <script>
+import { mapGetters } from "vuex";
+import { mapMutations } from "vuex";
+
 export default {
   data() {
     return {
@@ -59,6 +62,7 @@ export default {
     };
   },
   computed: {
+    ...mapGetters(['newestId']),
     editModel() {
       if (this.id) {
         return "立即修改";
@@ -76,17 +80,22 @@ export default {
   },
   props: ["id", "name", "address", "date"],
   methods: {
+    ...mapMutations(['updateCreatedId']),
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           alert("成功");
           console.log(this.ruleForm);
+          if (this.id === undefined) {
+            this.updateCreatedId()
+          }
           this.$router.push({
             name: "List",
             params: {
               name: this.ruleForm.name,
               date: this.ruleForm.date,
               address: this.ruleForm.address,
+              id: this.newestId
             },
           });
         } else {
@@ -97,7 +106,7 @@ export default {
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();
-    },
+    }
   },
   beforeRouteEnter(to, from, next) {
     if (to.params.id !== null || to.params.id !== "") {
