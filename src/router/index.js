@@ -13,6 +13,7 @@ const routes = [
       {
         path: 'list',
         name: 'List',
+        props: true,
         component: () => import('../views/Product/List.vue')
       },
       {
@@ -21,10 +22,22 @@ const routes = [
         component: () => import('../views/Product/Detail.vue')
       },
       {
+        path: 'detail/:id',
+        name: 'ItemDetail',
+        props: true,
+        component: () => import('../views/Product/Detail.vue')
+      },
+      {
         path: 'form',
         name: 'Form',
         component: () => import('../views/Product/Form.vue')
-      }
+      },
+      {
+        path: 'form/:id',
+        name: 'ItemForm',
+        props: true,
+        component: () => import('../views/Product/Form.vue')
+      },
     ]
   },
   {

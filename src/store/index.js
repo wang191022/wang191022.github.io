@@ -8,7 +8,7 @@ export default new Vuex.Store({
     Authorization: localStorage.getItem("Authorization")
       ? localStorage.getItem("Authorization")
       : "",
-    tableData: []
+    tableData: [],
   },
   mutations: {
     changeLogin(state, payLoad) {
@@ -17,6 +17,9 @@ export default new Vuex.Store({
     },
     updateTableData(state, payLoad) {
       state.tableData = payLoad.tableData
+    },
+    deleteTableItem(state, payLoad) {
+      state.tableData.splice(payLoad.i, 1);
     }
   },
   actions: {},

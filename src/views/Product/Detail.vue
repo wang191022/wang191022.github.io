@@ -4,9 +4,10 @@
       <div slot="header" class="clearfix">
         <h2 class="title">会员信息</h2>
       </div>
-      <div v-for="o in 4" :key="o" class="text item">
-        {{ "列表内容 " + o }}
-      </div>
+      <div class="text item">会员ID: {{ id }}</div>
+      <div class="text item">姓名: {{ name }}</div>
+      <div class="text item">生日: {{ date }}</div>
+      <div class="text item">地址: {{ address }}</div>
     </el-card>
   </div>
 </template>
@@ -17,7 +18,9 @@ export default {
   data() {
     return {};
   },
+  props: ["id", "name", "address", "date"],
 };
+
 </script>
 
 <style>
@@ -27,6 +30,10 @@ export default {
 
 .item {
   margin-bottom: 18px;
+  margin-left: 10%;
+  text-align: left;
+  font-size: 20px;
+  line-height: 28px;
 }
 
 .clearfix:before,

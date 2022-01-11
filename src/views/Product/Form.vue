@@ -11,26 +11,22 @@
         <el-input v-model="ruleForm.name"></el-input>
       </el-form-item>
       <el-form-item label="生日" prop="date">
-        <el-date-picker
-          type="date"
-          placeholder="选择日期"
-          v-model="ruleForm.date"
-          style="width: 100%"
-        ></el-date-picker>
+        <el-input placeholder="请输入日期: yyyy-mm-dd" v-model="ruleForm.date">
+        </el-input>
       </el-form-item>
       <el-form-item label="地址" prop="address">
         <el-input type="textarea" v-model="ruleForm.address"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="submitForm('ruleForm')"
-          >立即创建</el-button
-        >
-        <el-button @click="resetForm('ruleForm')"> 重置 </el-button>
+        <el-button type="primary" @click="submitForm('ruleForm')">{{
+          editModel
+        }}</el-button>
+        <el-button @click="resetForm('ruleForm')"> {{ btnModel }} </el-button>
       </el-form-item>
     </el-form>
   </div>
 </template>
-
+id
 <script>
 export default {
   data() {
@@ -47,22 +43,52 @@ export default {
         ],
         date: [
           {
-            type: "date",
             required: true,
-            message: "请选择日期",
-            trigger: "change",
+            message: "请输入日期",
+            trigger: "blur",
+          },
+          {
+            min: 10,
+            max: 10,
+            message: "请按照规定输入，注意年、月、日之间使用“-”（减号）分隔",
+            trigger: "blur",
           },
         ],
         address: [{ required: true, message: "请填写地址", trigger: "blur" }],
       },
     };
   },
+  computed: {
+    editModel() {
+      if (this.id) {
+        return "立即修改";
+      } else {
+        return "立即创建";
+      }
+    },
+    btnModel() {
+      if (this.id) {
+        return "恢复原数据";
+      } else {
+        return "清空数据";
+      }
+    },
+  },
+  props: ["id", "name", "address", "date"],
   methods: {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          alert("submit!");
+          alert("成功");
           console.log(this.ruleForm);
+          this.$router.push({
+            name: "List",
+            params: {
+              name: this.ruleForm.name,
+              date: this.ruleForm.date,
+              address: this.ruleForm.address,
+            },
+          });
         } else {
           console.log("error submit!!");
           return false;
@@ -72,6 +98,17 @@ export default {
     resetForm(formName) {
       this.$refs[formName].resetFields();
     },
+  },
+  beforeRouteEnter(to, from, next) {
+    if (to.params.id !== null || to.params.id !== "") {
+      next((vm) => {
+        vm.ruleForm.name = to.params.name;
+        vm.ruleForm.address = to.params.address;
+        vm.ruleForm.date = to.params.date;
+      });
+    } else {
+      next();
+    }
   },
 };
 </script>
