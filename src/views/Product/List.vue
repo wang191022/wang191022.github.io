@@ -31,19 +31,12 @@ export default {
   name: "List",
   data() {
     return {
-      newUser: {
-        name: '',
-        id: '',
-        address: '',
-        date: ''
-      }
     };
   },
   computed: {
     ...mapState(["tableData"]),
     total() {
-      let arr = this.tableData
-      return arr
+      return this.tableData
     }
   },
   props: ['id', 'name', 'address', 'date'],
@@ -58,14 +51,6 @@ export default {
         .catch((err) => {
           throw err;
         });
-    },
-    updateNewCreate() {
-      if (this.id) {
-        this.newUser.name = this.name
-        this.newUser.id = this.id
-        this.newUser.address = this.address
-        this.newUser.date = this.date
-      }
     },
     deleteItem(row) {
       let i = this.total.indexOf(row);
@@ -100,20 +85,8 @@ export default {
   },
   mounted() {
     this.getTableData();
-    this.updateNewCreate()
-  },
-  beforeRouteEnter(to, from, next) {
-    if (to.params.id !== null || to.params.id !== "") {
-      next((vm) => {
-        vm.newUser.name = to.params.name;
-        vm.newUser.address = to.params.address;
-        vm.newUser.date = to.params.date;
-        vm.newUser.id = to.params.id
-      });
-    } else {
-      next();
-    }
-  },
+  
+  }
 };
 </script>
 
