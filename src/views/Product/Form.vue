@@ -85,7 +85,6 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           alert("成功");
-          console.log(this.ruleForm);
           if (this.id === undefined) {
             this.updateCreatedId()
           }
