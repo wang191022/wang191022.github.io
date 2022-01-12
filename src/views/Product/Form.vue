@@ -102,12 +102,12 @@ export default {
           if (this.id === undefined) {
             
             // 将新建用户信息存储到vuex
-            this.updateCreatedData({
-              name: this.ruleForm.name,
-              date: this.ruleForm.date,
-              address: this.ruleForm.address,
-              id: this.newestId
-            })
+            // this.updateCreatedData({
+            //   name: this.ruleForm.name,
+            //   date: this.ruleForm.date,
+            //   address: this.ruleForm.address,
+            //   id: this.newestId
+            // })
             
             // 当为新建用户时，用户创建数量+1
             this.updateCreatedId();

@@ -29,18 +29,17 @@ import { mapGetters, mapMutations, mapState } from "vuex";
 export default {
   name: "List",
   data() {
-    return {
-      ...mapState(['tableData'])
-    };
+    return {};
   },
   computed: {
-    ...mapGetters(['totalData']),
+    ...mapState(["tableData"]),
+    ...mapGetters(["totalData"]),
     total() {
-      return this.tableData
-    }
+      return this.tableData;
+    },
   },
   // 接受来自 “form” 页面传递的参数
-  props: ['id', 'name', 'address', 'date'],
+  props: ["id", "name", "address", "date"],
   methods: {
     ...mapMutations(["updateTableData", "deleteTableItem"]),
     getTableData() {
@@ -92,7 +91,7 @@ export default {
   mounted() {
     // vue实例挂载完成后，获取用户数据
     this.getTableData();
-  }
+  },
 };
 </script>
 
