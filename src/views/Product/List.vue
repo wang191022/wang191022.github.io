@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations, mapState } from "vuex";
+import {  mapMutations, mapState } from "vuex";
 
 export default {
   name: "List",
@@ -33,7 +33,6 @@ export default {
   },
   computed: {
     ...mapState(["tableData"]),
-    ...mapGetters(["totalData"]),
     total() {
       return this.tableData;
     },

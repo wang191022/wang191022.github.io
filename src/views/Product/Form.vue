@@ -88,7 +88,7 @@ export default {
       } else {
         return "清空数据";
       }
-    }, 
+    },
   },
 
   // 接受路由传参
@@ -99,19 +99,17 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           alert("成功");
-          if (this.id === undefined) {
-            
-            // 将新建用户信息存储到vuex
-            // this.updateCreatedData({
-            //   name: this.ruleForm.name,
-            //   date: this.ruleForm.date,
-            //   address: this.ruleForm.address,
-            //   id: this.newestId
-            // })
-            
-            // 当为新建用户时，用户创建数量+1
-            this.updateCreatedId();
-          }
+          // 将新建用户信息存储到vuex
+          this.updateCreatedData({
+            name: this.ruleForm.name,
+            date: this.ruleForm.date,
+            address: this.ruleForm.address,
+            id: this.newestId,
+          });
+
+          // 当为新建用户时，用户创建数量+1
+          this.updateCreatedId();
+
           // 实际应该是通过 axios.post() 发送给后台
           // 通过验证后在 “list” 页面更新数据
           this.$router.push({ name: "List" });

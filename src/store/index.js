@@ -9,6 +9,7 @@ export default new Vuex.Store({
       ? localStorage.getItem("Authorization")
       : "",               // 登录token
     tableData: [],        // 存储请求的用户信息
+    createdData: [],      // 创建的用户信息
     menuActive: -1,       // 当前激活菜单坐标
     firstId: 700000,      // 初识会员ID
     newCreate: 0,         // 新建会员计数
@@ -32,6 +33,11 @@ export default new Vuex.Store({
     updateTableData(state, payLoad) {
       // 更新请求到的用户信息
       state.tableData = payLoad.tableData;
+    },
+    updateCreatedData(state, payLoad){
+      state.createdData.push(payLoad)
+      console.log(payLoad);
+      console.log(state.createdData);
     },
     deleteTableItem(state, payLoad) {
       // 删除表格中选中的用户信息
