@@ -13,6 +13,7 @@ Vue.prototype.$axios = axios;
 axios.interceptors.request.use(
   (config) => {
     if (localStorage.getItem("Authorization")) {
+      // 每次请求时，携带token验证
       config.headers.Authorization = localStorage.getItem("Authorization");
     }
 
@@ -26,6 +27,7 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
   (response) => {
     if (response.status === 200) {
+      // 状态码为200
       return Promise.resolve(response);
     } else {
       return Promise.reject(response);
@@ -34,13 +36,13 @@ axios.interceptors.response.use(
   (error) => {
     if (error.response.status) {
       switch (error.response.status) {
-        // 401: 未登录
+        // 状态码401: 未登录
         // 跳转登录页面
         case 401:
           this.$router.replace({name: 'Login'})
           break;
 
-        // 403: token失效
+        // 状态码403: token失效
         // 清除本地token
         // 跳转登录页面
         case 403:

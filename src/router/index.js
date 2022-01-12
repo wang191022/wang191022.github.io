@@ -85,7 +85,8 @@ router.beforeEach((to, from, next) => {
     // 登录验证：若非'/login'路径，查看本地数据库的token是否存在
     let token = localStorage.getItem("Authorization");
 
-    // 若不存在，跳转登录页面；否则，继续执行
+    // 若token不存在，跳转登录页面；否则，继续执行
+    // 可以在控制台验证
     if (token === null || token === "") {
       next("/login");
     } else {
