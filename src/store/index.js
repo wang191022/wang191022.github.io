@@ -11,46 +11,46 @@ export default new Vuex.Store({
     tableData: [],
     menuActive: -1,
     firstId: 700000,
-    newCreate: 0
+    newCreate: 0,
   },
   getters: {
     newestId(state) {
-      return state.firstId + state.newCreate
+      return state.firstId + state.newCreate;
     },
     newestMenu(state) {
-      return state.menuActive + ''
-    }
+      return state.menuActive + "";
+    },
   },
   mutations: {
     changeLogin(state, payLoad) {
-      state.Authorization = payLoad.Authorization
-      localStorage.setItem('Authorization', payLoad.Authorization)
+      state.Authorization = payLoad.Authorization;
+      localStorage.setItem("Authorization", payLoad.Authorization);
     },
     updateTableData(state, payLoad) {
-      state.tableData = payLoad.tableData
+      state.tableData = payLoad.tableData;
     },
     deleteTableItem(state, payLoad) {
       state.tableData.splice(payLoad.i, 1);
     },
     updateMenu(state, payLoad) {
       switch (payLoad.path) {
-        case '/list':
-          state.menuActive = 0
+        case "/list":
+          state.menuActive = 0;
           break;
-          case '/detail':
-            state.menuActive = 1
-            break;
-            case '/form':
-              state.menuActive = 2
-              break;
+        case "/detail":
+          state.menuActive = 1;
+          break;
+        case "/form":
+          state.menuActive = 2;
+          break;
         default:
-          state.menuActive = -1
+          state.menuActive = -1;
           break;
       }
     },
     updateCreatedId(state) {
-      state.newCreate ++
-    }
+      state.newCreate++;
+    },
   },
   actions: {},
   modules: {},
