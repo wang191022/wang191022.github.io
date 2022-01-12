@@ -35,9 +35,8 @@ export default new Vuex.Store({
       state.tableData = payLoad.tableData;
     },
     updateCreatedData(state, payLoad){
+      // 更新创建的用户信息
       state.createdData.push(payLoad)
-      console.log(payLoad);
-      console.log(state.createdData);
     },
     deleteTableItem(state, payLoad) {
       // 删除表格中选中的用户信息
