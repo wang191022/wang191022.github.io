@@ -36,13 +36,16 @@ export default {
   computed: {
     ...mapState(["tableData"]),
     total() {
+      // 
       return this.tableData
     }
   },
+  // 接受来自 “form” 页面传递的参数
   props: ['id', 'name', 'address', 'date'],
   methods: {
     ...mapMutations(["updateTableData", "deleteTableItem"]),
     getTableData() {
+      // 获取用户数据，并存储到vuex中
       this.$axios
         .get("http://rap2api.taobao.org/app/mock/296473/userInfo")
         .then((res) => {
@@ -53,14 +56,17 @@ export default {
         });
     },
     deleteItem(row) {
+      // 通过索引定位当前选中对象，并在vuex中删除
       let i = this.total.indexOf(row);
       this.deleteTableItem({ i });
       console.log(this.total);
     },
     linkToForm() {
+      // 跳转到 “form” 页面
       this.$router.push({ name: "Form" });
     },
     linkToDetail(row) {
+      // 跳转到 “detail” 页面，并将选中的用户信息作为参数传递
       this.$router.push({
         name: "ItemDetail",
         params: {
@@ -72,6 +78,7 @@ export default {
       });
     },
     linkToEdit(row) {
+      // 跳转到 “form” 页面，并将选中的用户信息作为参数传递
       this.$router.push({
         name: "ItemForm",
         params: {
@@ -84,8 +91,8 @@ export default {
     },
   },
   mounted() {
+    // vue实例挂载完成后，获取用户数据
     this.getTableData();
-  
   }
 };
 </script>

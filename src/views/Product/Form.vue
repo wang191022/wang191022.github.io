@@ -35,15 +35,21 @@ export default {
   data() {
     return {
       ruleForm: {
+        // 表格初始空对象
         name: "",
         date: "",
         address: "",
       },
       rules: {
+        // 表格校验规则
+
+        // 用户姓名
         name: [
           { required: true, message: "请输入姓名", trigger: "blur" },
           { min: 2, max: 5, message: "长度在 2 到 5 个字符", trigger: "blur" },
         ],
+
+        // 用户生日
         date: [
           {
             required: true,
@@ -57,6 +63,8 @@ export default {
             trigger: "blur",
           },
         ],
+
+        // 用户地址
         address: [{ required: true, message: "请填写地址", trigger: "blur" }],
       },
     };
@@ -64,6 +72,8 @@ export default {
   computed: {
     ...mapGetters(['newestId']),
     editModel() {
+      // 根据路由传递的参数，动态渲染页面内容
+      // “修改” / “创建”
       if (this.id) {
         return "立即修改";
       } else {
@@ -71,6 +81,8 @@ export default {
       }
     },
     btnModel() {
+      // 根据路由传递的参数，动态渲染页面内容
+      // “修改” / “创建”
       if (this.id) {
         return "恢复原数据";
       } else {
@@ -78,6 +90,8 @@ export default {
       }
     },
   },
+
+  // 接受路由传参
   props: ["id", "name", "address", "date"],
   methods: {
     ...mapMutations(['updateCreatedId']),
@@ -86,9 +100,13 @@ export default {
         if (valid) {
           alert("成功");
           if (this.id === undefined) {
+            // 当为新建用户时，用户创建数量+1
             this.updateCreatedId()
           }
+            // 将新建用户信息作为路由参数传递给“list”页面
           this.$router.push({
+            // 实际应该是通过 axios.post() 发送给后台
+            // 通过后在 “list” 页面更新数据
             name: "List",
             params: {
               name: this.ruleForm.name,
@@ -104,10 +122,14 @@ export default {
       });
     },
     resetForm(formName) {
+      // 重置当前数据
+      // 若为更新则重置回元数据
+      // 若为新建则清空内容
       this.$refs[formName].resetFields();
     }
   },
   beforeRouteEnter(to, from, next) {
+    // 路由若携带参数，则将页面表格内的数据渲染为参数数据
     if (to.params.id !== null || to.params.id !== "") {
       next((vm) => {
         vm.ruleForm.name = to.params.name;

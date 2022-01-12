@@ -18,6 +18,8 @@ export default {
   data() {
     return {};
   },
+
+  // 接受路由传递的参数，并渲染到页面中
   props: ["id", "name", "address", "date"],
 };
 

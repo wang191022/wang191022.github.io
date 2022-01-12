@@ -7,10 +7,12 @@ Vue.use(VueRouter);
 
 const routes = [
   {
+    // 登录后默认的路由路径
     path: "/",
     name: "Home",
     component: Home,
     children: [
+      // 子路由
       {
         path: "list",
         name: "List",
@@ -23,6 +25,8 @@ const routes = [
         component: () => import("../views/Product/Detail.vue"),
       },
       {
+        // 通过动态路由，跳转用户详情界面
+        // 使用 router.push() 传递当前查看的用户信息，并渲染
         path: "detail/:id",
         name: "ItemDetail",
         props: true,
@@ -34,6 +38,8 @@ const routes = [
         component: () => import("../views/Product/Form.vue"),
       },
       {
+        // 通过动态路由，跳转用户编辑界面
+        // 使用 router.push() 传递选中用户信息，并渲染
         path: "form/:id",
         name: "ItemForm",
         props: true,
@@ -65,17 +71,21 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
+
+  // 登录验证
   if (to.path === "/login") {
     next();
   } else {
-    let token = localStorage.getItem("Authorization");
-
+    
+    // 将即将进入的路由路径，作为参数传递给 “更新菜单激活坐标” 函数，并执行
     store.commit("updateMenu", {
       path: to.path,
     });
 
-    console.log(store.state.menuActive);
+    // 登录验证：若非'/login'路径，查看本地数据库的token是否存在
+    let token = localStorage.getItem("Authorization");
 
+    // 若不存在，跳转登录页面；否则，继续执行
     if (token === null || token === "") {
       next("/login");
     } else {

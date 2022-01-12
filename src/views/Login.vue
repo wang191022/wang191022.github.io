@@ -45,7 +45,7 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(["changeLogin"]),
+    ...mapMutations(["updateToken"]),
     login() {
       if (this.formData.account === "" || this.formData.password === "") {
         this.$message.warning("账号与密码不能为空");
@@ -57,7 +57,7 @@ export default {
         })
           .then((res) => {
             this.userToken = "Bearer" + res.data.token;
-            this.changeLogin({ Authorization: this.userToken });
+            this.updateToken({ Authorization: this.userToken });
             this.$router.push({ name: "Home" });
           })
           .catch((err) => {
