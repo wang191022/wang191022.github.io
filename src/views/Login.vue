@@ -56,7 +56,6 @@ export default {
           data: this.formData,
         })
           .then((res) => {
-            console.log(res);
             this.userToken = "Bearer" + res.data.token;
             this.changeLogin({ Authorization: this.userToken });
             this.$router.push({ name: "Home" });
