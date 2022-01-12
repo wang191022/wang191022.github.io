@@ -7,11 +7,12 @@ export default new Vuex.Store({
   state: {
     Authorization: localStorage.getItem("Authorization")
       ? localStorage.getItem("Authorization")
-      : "",           // 登录token
-    tableData: [],    // 存储请求的用户信息
-    menuActive: -1,   // 当前激活菜单坐标
-    firstId: 700000,  // 初识会员ID
-    newCreate: 0,     // 新建会员计数
+      : "",               // 登录token
+    tableData: [],        // 存储请求的用户信息
+    createdData: [],      // 存储创建的用户信息
+    menuActive: -1,       // 当前激活菜单坐标
+    firstId: 700000,      // 初识会员ID
+    newCreate: 0,         // 新建会员计数
   },
   getters: {
     newestId(state) {
@@ -22,6 +23,9 @@ export default new Vuex.Store({
       // 返回当前激活的菜单坐标
       return state.menuActive + "";
     },
+    // totalData(state) {
+    //   return state.tableData.push(state.createdData)
+    // }
   },
   mutations: {
     updateToken(state, payLoad) {
@@ -36,6 +40,10 @@ export default new Vuex.Store({
     deleteTableItem(state, payLoad) {
       // 删除表格中选中的用户信息
       state.tableData.splice(payLoad.i, 1);
+    },
+    updateCreatedData(state, payLoad) {
+      let arr = payLoad
+      state.createdData.push(arr)
     },
     updateMenu(state, payLoad) {
       // 更新激活菜单坐标

@@ -70,7 +70,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['newestId']),
+    ...mapGetters(["newestId"]),
     editModel() {
       // 根据路由传递的参数，动态渲染页面内容
       // “修改” / “创建”
@@ -81,40 +81,40 @@ export default {
       }
     },
     btnModel() {
-      // 根据路由传递的参数，动态渲染页面内容
+      // 根据路由传递的参数，动态渲染按钮文本
       // “修改” / “创建”
       if (this.id) {
         return "恢复原数据";
       } else {
         return "清空数据";
       }
-    },
+    }, 
   },
 
   // 接受路由传参
   props: ["id", "name", "address", "date"],
   methods: {
-    ...mapMutations(['updateCreatedId']),
+    ...mapMutations(["updateCreatedId", "updateCreatedData"]),
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           alert("成功");
           if (this.id === undefined) {
-            // 当为新建用户时，用户创建数量+1
-            this.updateCreatedId()
-          }
-            // 将新建用户信息作为路由参数传递给“list”页面
-          this.$router.push({
-            // 实际应该是通过 axios.post() 发送给后台
-            // 通过后在 “list” 页面更新数据
-            name: "List",
-            params: {
+            
+            // 将新建用户信息存储到vuex
+            this.updateCreatedData({
               name: this.ruleForm.name,
               date: this.ruleForm.date,
               address: this.ruleForm.address,
               id: this.newestId
-            },
-          });
+            })
+            
+            // 当为新建用户时，用户创建数量+1
+            this.updateCreatedId();
+          }
+          // 实际应该是通过 axios.post() 发送给后台
+          // 通过验证后在 “list” 页面更新数据
+          this.$router.push({ name: "List" });
         } else {
           console.log("error submit!!");
           return false;
@@ -126,7 +126,7 @@ export default {
       // 若为更新则重置回元数据
       // 若为新建则清空内容
       this.$refs[formName].resetFields();
-    }
+    },
   },
   beforeRouteEnter(to, from, next) {
     // 路由若携带参数，则将页面表格内的数据渲染为参数数据

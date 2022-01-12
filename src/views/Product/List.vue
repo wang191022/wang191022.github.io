@@ -24,19 +24,18 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
-import { mapMutations } from "vuex";
+import { mapGetters, mapMutations, mapState } from "vuex";
 
 export default {
   name: "List",
   data() {
     return {
+      ...mapState(['tableData'])
     };
   },
   computed: {
-    ...mapState(["tableData"]),
+    ...mapGetters(['totalData']),
     total() {
-      // 
       return this.tableData
     }
   },
