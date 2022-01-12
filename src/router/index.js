@@ -1,80 +1,87 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Vue from "vue";
+import VueRouter from "vue-router";
+import store from "../store";
+import Home from "../views/Home.vue";
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
+    path: "/",
+    name: "Home",
     component: Home,
     children: [
       {
-        path: 'list',
-        name: 'List',
+        path: "list",
+        name: "List",
         props: true,
-        component: () => import('../views/Product/List.vue')
+        component: () => import("../views/Product/List.vue"),
       },
       {
-        path: 'detail',
-        name: 'Detail',
-        component: () => import('../views/Product/Detail.vue')
+        path: "detail",
+        name: "Detail",
+        component: () => import("../views/Product/Detail.vue"),
       },
       {
-        path: 'detail/:id',
-        name: 'ItemDetail',
+        path: "detail/:id",
+        name: "ItemDetail",
         props: true,
-        component: () => import('../views/Product/Detail.vue')
+        component: () => import("../views/Product/Detail.vue"),
       },
       {
-        path: 'form',
-        name: 'Form',
-        component: () => import('../views/Product/Form.vue')
+        path: "form",
+        name: "Form",
+        component: () => import("../views/Product/Form.vue"),
       },
       {
-        path: 'form/:id',
-        name: 'ItemForm',
+        path: "form/:id",
+        name: "ItemForm",
         props: true,
-        component: () => import('../views/Product/Form.vue')
+        component: () => import("../views/Product/Form.vue"),
       },
-    ]
+    ],
   },
   {
-    path: '/login',
-    name: 'Login',
-    component: () => import('../views/Login.vue')
+    path: "/login",
+    name: "Login",
+    component: () => import("../views/Login.vue"),
   },
   {
-    path: '/register',
-    name: 'Register',
-    component: () => import('../views/Register.vue')
+    path: "/register",
+    name: "Register",
+    component: () => import("../views/Register.vue"),
   },
   {
-    path: '*',
-    name: 'NotFound',
-    component: () => import('../views/NotFound.vue')
-  }
-]
+    path: "*",
+    name: "NotFound",
+    component: () => import("../views/NotFound.vue"),
+  },
+];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
-  routes
-})
+  routes,
+});
 
 router.beforeEach((to, from, next) => {
-  if (to.path === '/login') {
-    next()
+  if (to.path === "/login") {
+    next();
   } else {
-    let token = localStorage.getItem('Authorization')
-    
-    if (token === null || token === '') {
-      next('/login')
+    let token = localStorage.getItem("Authorization");
+
+    store.commit("updateMenu", {
+      path: to.path,
+    });
+
+    console.log(store.state.menuActive);
+
+    if (token === null || token === "") {
+      next("/login");
     } else {
-      next()
+      next();
     }
   }
-})
+});
 
-export default router
+export default router;

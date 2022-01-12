@@ -1,6 +1,6 @@
 <template>
   <div class="menu">
-    <el-menu default-active="-1" class="el-menu-vertical-demo">
+    <el-menu :default-active="newestMenu" class="el-menu-vertical-demo">
         <router-link
           v-for="(item, index) in menu"
           :key="index"
@@ -16,6 +16,8 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   name: "Menu",
   data() {
@@ -43,6 +45,9 @@ export default {
         },
       ],
     };
+  },
+  computed: {
+    ...mapGetters(['newestMenu'])
   },
   methods: {
   },

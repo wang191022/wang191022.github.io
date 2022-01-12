@@ -9,12 +9,16 @@ export default new Vuex.Store({
       ? localStorage.getItem("Authorization")
       : "",
     tableData: [],
+    menuActive: -1,
     firstId: 700000,
     newCreate: 0
   },
   getters: {
     newestId(state) {
       return state.firstId + state.newCreate
+    },
+    newestMenu(state) {
+      return state.menuActive + ''
     }
   },
   mutations: {
@@ -27,6 +31,22 @@ export default new Vuex.Store({
     },
     deleteTableItem(state, payLoad) {
       state.tableData.splice(payLoad.i, 1);
+    },
+    updateMenu(state, payLoad) {
+      switch (payLoad.path) {
+        case '/list':
+          state.menuActive = 0
+          break;
+          case '/detail':
+            state.menuActive = 1
+            break;
+            case '/form':
+              state.menuActive = 2
+              break;
+        default:
+          state.menuActive = -1
+          break;
+      }
     },
     updateCreatedId(state) {
       state.newCreate ++
